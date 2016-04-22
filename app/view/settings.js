@@ -54,7 +54,7 @@ class Settings extends React.Component {
 		super(props);
 
 		this.state = {
-			gender: props.data.gender ==  0 || 'Masculino' ? 'Masculino' : 'Feminino',
+			gender: props.data.gender,
 			options: props.data.gender,
 			name: props.data.name,
 			lastname: props.data.lastname,

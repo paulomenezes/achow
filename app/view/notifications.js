@@ -39,6 +39,7 @@ class Notifications extends React.Component {
 			dataSource: new ListView.DataSource({
 				rowHasChanged: (row1, row2) => row1 !== row2
 			}),
+			notifications: []
 		}
 
 		this.loadNotifications();
@@ -51,7 +52,8 @@ class Notifications extends React.Component {
 			.then((response) => response.json())
 			.then((notifications) => {
 				this.setState({
-					dataSource: this.state.dataSource.cloneWithRows(notifications.notifications)
+					dataSource: this.state.dataSource.cloneWithRows(notifications.notifications),
+					notifications: notifications.notifications
 				});
 			})
 			.catch((error) => {
@@ -111,12 +113,16 @@ class Notifications extends React.Component {
 	}
 
 	render() {
-		return (
-			<ListView 
-				style={{ flex: 1 }}
-				dataSource={ this.state.dataSource }
-				renderRow={ this.renderNotifications.bind(this) } />
-		);
+		if (this.state.notifications.length > 0) {
+			return (
+				<ListView 
+					style={{ flex: 1 }}
+					dataSource={ this.state.dataSource }
+					renderRow={ this.renderNotifications.bind(this) } />
+			);
+		} else {
+			return <Text style={{ textAlign: 'center', margin: 10 }}>Você não tem nenhuma notificação.</Text>;
+		}
 	}
 }
 

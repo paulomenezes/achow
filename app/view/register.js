@@ -58,8 +58,8 @@ class Register extends React.Component {
 		super(props);
 		
 		this.state = {
-			gender: 'Masculino',
-			options: 'Masculino',
+			gender: '',
+			options: '',
 			_return: "0",
 			name: "",
 			lastname: "",

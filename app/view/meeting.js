@@ -187,12 +187,12 @@ class Meeting extends React.Component {
 				</View>
 				: <View /> }
 				{ row.visited == 6 ? 
-				<View style={ styles.marked }>
+				<View style={ styles.marked1 }>
 					<Icon style={ styles.checkmark } name="thumbsup" size={20} color="#fff" />
 				</View>
 				: <View /> }
 				{ row.visited == 7 ? 
-				<View style={ styles.marked }>
+				<View style={ styles.marked2 }>
 					<Icon style={ styles.checkmark } name="thumbsdown" size={20} color="#fff" />
 				</View>
 				: <View /> }
@@ -312,6 +312,24 @@ var styles = StyleSheet.create({
 		margin: 10,
 		borderRadius: 25,
 		backgroundColor: 'rgba(0, 0, 0, 0.5)',
+		position: 'absolute',
+		top: 0
+	},
+	marked1: {
+		width: 50,
+		height: 50,
+		margin: 10,
+		borderRadius: 25,
+		backgroundColor: 'rgba(0, 120, 0, 0.5)',
+		position: 'absolute',
+		top: 0
+	},
+	marked2: {
+		width: 50,
+		height: 50,
+		margin: 10,
+		borderRadius: 25,
+		backgroundColor: 'rgba(120, 0, 0, 0.5)',
 		position: 'absolute',
 		top: 0
 	},
