@@ -21,6 +21,7 @@
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		53417E1B1C2455E800E23C1C /* libRNSocialAuth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53417E1A1C2455D700E23C1C /* libRNSocialAuth.a */; };
 		539642F81C2802660058F7DD /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 539642F71C2802660058F7DD /* Accounts.framework */; };
+		75100C341CCFF86100928D7E /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75100C331CCFF7D500928D7E /* libRCTPushNotification.a */; };
 		75559C3D1CAE06FE00351B7E /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75559C3B1CAE06FE00351B7E /* FBSDKCoreKit.framework */; };
 		75559C3E1CAE06FE00351B7E /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75559C3C1CAE06FE00351B7E /* FBSDKLoginKit.framework */; };
 		759277A21C6176A10082386E /* UIImagePickerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 759277A01C6176A10082386E /* UIImagePickerManager.m */; };
@@ -103,6 +104,13 @@
 			remoteGlobalIDString = 533DBF7D1C23D77400AE7307;
 			remoteInfo = RNSocialAuth;
 		};
+		75100C321CCFF7D500928D7E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 75100C2E1CCFF7D500928D7E /* RCTPushNotification.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTPushNotification;
+		};
 		759804D61C3AD71900F631D6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 759804D21C3AD71900F631D6 /* RNVectorIcons.xcodeproj */;
@@ -144,6 +152,7 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		53417E151C2455D700E23C1C /* RNSocialAuth.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSocialAuth.xcodeproj; path = "../node_modules/react-native-social-auth/ios/RNSocialAuth.xcodeproj"; sourceTree = "<group>"; };
 		539642F71C2802660058F7DD /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		75100C2E1CCFF7D500928D7E /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
 		75559C3B1CAE06FE00351B7E /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		75559C3C1CAE06FE00351B7E /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		759277A01C6176A10082386E /* UIImagePickerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImagePickerManager.m; sourceTree = "<group>"; };
@@ -170,6 +179,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75559C3E1CAE06FE00351B7E /* FBSDKLoginKit.framework in Frameworks */,
+				75100C341CCFF86100928D7E /* libRCTPushNotification.a in Frameworks */,
 				759804D81C3AD72B00F631D6 /* libRNVectorIcons.a in Frameworks */,
 				539642F81C2802660058F7DD /* Accounts.framework in Frameworks */,
 				53417E1B1C2455E800E23C1C /* libRNSocialAuth.a in Frameworks */,
@@ -276,6 +286,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		75100C2F1CCFF7D500928D7E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				75100C331CCFF7D500928D7E /* libRCTPushNotification.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		759804D31C3AD71900F631D6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -295,6 +313,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				75100C2E1CCFF7D500928D7E /* RCTPushNotification.xcodeproj */,
 				759277A01C6176A10082386E /* UIImagePickerManager.m */,
 				759277A11C6176A10082386E /* UIImagePickerManager.h */,
 				759804D21C3AD71900F631D6 /* RNVectorIcons.xcodeproj */,
@@ -400,6 +419,11 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = E8DUL3GSQE;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -434,6 +458,10 @@
 				{
 					ProductGroup = 00C302D41ABCB9D200DB3ED1 /* Products */;
 					ProjectRef = 00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */;
+				},
+				{
+					ProductGroup = 75100C2F1CCFF7D500928D7E /* Products */;
+					ProjectRef = 75100C2E1CCFF7D500928D7E /* RCTPushNotification.xcodeproj */;
 				},
 				{
 					ProductGroup = 139105B71AF99BAD00B5F7CC /* Products */;
@@ -534,6 +562,13 @@
 			fileType = archive.ar;
 			path = libRNSocialAuth.a;
 			remoteRef = 53417E191C2455D700E23C1C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		75100C331CCFF7D500928D7E /* libRCTPushNotification.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTPushNotification.a;
+			remoteRef = 75100C321CCFF7D500928D7E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		759804D71C3AD71900F631D6 /* libRNVectorIcons.a */ = {
@@ -681,6 +716,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-social-auth/**",
+					"$(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS/**",
 				);
 				INFOPLIST_FILE = socialAuthExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -711,6 +747,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-social-auth/**",
+					"$(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS/**",
 				);
 				INFOPLIST_FILE = socialAuthExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
