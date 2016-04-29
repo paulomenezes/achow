@@ -11,7 +11,9 @@ const {
 	Modal,
 	TouchableHighlight,
 	Image,
-	AlertIOS
+	AlertIOS,
+	Platform,
+	PushNotificationIOS
 } = React;
 
 import SocialAuth from 'react-native-social-auth';
@@ -40,6 +42,7 @@ var Alert = require('../components/alert');
 var GcmAndroid = require('react-native-gcm-android');
 
 var Token;
+var IOSToken;
 
 var loadUser = function (callback) {
 	LoadUser(function (user, userModel) {
@@ -79,11 +82,19 @@ class Login extends React.Component {
 	componentDidMount() {
 		var self = this;
 
-		GcmAndroid.addEventListener('register', function(token){
-			Token = token;
-		});
+		if (Platform.OS === 'ios') {
+			PushNotificationIOS.addEventListener('register', function (token) {
+				console.log('login', token);
+				IOSToken = token;
+			});
+			PushNotificationIOS.requestPermissions();
+		} else {
+			GcmAndroid.addEventListener('register', function(token){
+				Token = token;
+			});
 
-		GcmAndroid.requestPermissions();
+			GcmAndroid.requestPermissions();
+		}
 	}
 
 	_getFBCredentials() {
@@ -104,6 +115,7 @@ class Login extends React.Component {
 		        		body: JSON.stringify({
 		        			facebookID: credentials.userId,
 		        			gcmid: Token,
+		        			iostoken: IOSToken,
 		        			image: facebookUser.picture.data.url ? facebookUser.picture.data.url : false,
 			        		cover: facebookUser.cover.source ? facebookUser.cover.source : false,
 		        		}),
@@ -136,7 +148,8 @@ class Login extends React.Component {
 			        			ocupation: '',
 			        			password: '',
 			        			phone: '',
-			        			gcmid: null
+			        			gcmid: Token,
+		        				iostoken: IOSToken,
 			        		};
 
 			        		fetch(Constants.URL + "users", {

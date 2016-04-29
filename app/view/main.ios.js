@@ -10,7 +10,8 @@ var {
 	Component,
 	StyleSheet,
 	TabBarIOS,
-	PushNotificationIOS
+	PushNotificationIOS,
+	AlertIOS
 } = React;
 
 var Drawer = require('react-native-drawer');
@@ -34,10 +35,6 @@ class Main extends Component {
 	constructor(props) {
 		super(props);
 
-		this._sendNotification();
-
-		console.log('main');
-
 		this.state = {
 			user: props.data,
 			selectedTab: 'home',
@@ -52,35 +49,19 @@ class Main extends Component {
 	}
 
 	componentWillMount() {
-		console.log('will mount');
 		PushNotificationIOS.addEventListener('notification', this._onNotification);
 	}
 
 	componentWillUnmount() {
-		console.log('will unmount');
 		PushNotificationIOS.removeEventListener('notification', this._onNotification);
 	}
 
-	_sendNotification() {
-		require('RCTDeviceEventEmitter').emit('remoteNotificationReceived', {
-			aps: {
-				alert: 'Sample notification',
-				badge: '+1',
-				sound: 'default',
-				category: 'REACT_NATIVE'
-			},
-		});
-	}
-
 	_onNotification(notification) {
-		AlertIOS.alert(
-			'Notification Received',
-			'Alert message: ' + notification.getMessage(),
-			[{
-				text: 'Dismiss',
-				onPress: null,
-			}]
-		);
+		PushNotificationIOS.presentLocalNotification({
+			alertBody: notification.getMessage(),
+			soundName: 'default',
+			sound: 'default'
+		});
 	}
 
 	loadRequests() {
@@ -121,6 +102,7 @@ class Main extends Component {
 	}
 
 	_renderContent(color, pageText, num) {
+
 	    return (
 	      	<View style={[styles.tabContent]}>
 	        	<Text style={styles.tabText}>{pageText}</Text>
