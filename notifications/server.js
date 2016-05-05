@@ -1,12 +1,16 @@
 var express = require('express');
 var app = express();
 
+var bodyParser = require('body-parser');
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+
 var apn = require('apn');
 
-app.get('/n/:id/:msg', function (req, res) {
-	var tokens = req.params.id;
+app.post('/n', function (req, res) {
+	var tokens = req.body.id;
 
-	var service = new apn.connection({ cert: 'CertificadosPushAchow.pem', 'key': 'CertificadosPushAchow.pem', passphrase: '95758213', production: false });
+	var service = new apn.connection({ cert: 'cert.pem', 'key': 'cert.pem', passphrase: '95758213', production: false });
 
 	service.on("connected", function() {
 	    console.log("Connected");
@@ -38,13 +42,15 @@ app.get('/n/:id/:msg', function (req, res) {
 	function pushNotificationToMany() {
 	    console.log("Sending the same notification each of the devices with one call to pushNotification.");
 	    var note = new apn.notification();
-	    note.setAlertText("Hello, from node-apn!");
+	    note.setAlertText(req.body.msg);
 	    note.badge = 1;
 
 	    service.pushNotification(note, tokens);
 	}
 
 	pushNotificationToMany();
+
+	res.send('success');
 });
 
-app.listen(8080);
+app.listen(process.env.PORT);
