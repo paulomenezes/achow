@@ -88,12 +88,50 @@ class Like extends React.Component {
 			})
 	}
 
+	openTimes() {
+		fetch(Constants.URL + 'stores/' + this.state.store.id + '/schedule')
+			.then((response) => response.json())
+			.then((schedule) => {
+				if (schedule.length > 0) {
+					var text = '';
+					for (var i = 0; i < schedule.length; i++) {
+							 if (schedule[i].dayOfWeek == 0) text += 'Domingo: ';
+						else if (schedule[i].dayOfWeek == 1) text += 'Segunda: ';
+						else if (schedule[i].dayOfWeek == 2) text += 'Terça: ';
+						else if (schedule[i].dayOfWeek == 3) text += 'Quarta: ';
+						else if (schedule[i].dayOfWeek == 4) text += 'Quinta: ';
+						else if (schedule[i].dayOfWeek == 5) text += 'Sexta: ';
+						else if (schedule[i].dayOfWeek == 6) text += 'Sábado: ';
+
+						if (schedule[i].closed == 1) 
+							text += 'Fechado\n';
+						else
+							text += schedule[i].hourOpen + ' - ' + schedule[i].hourClose + '\n';
+					};
+
+					Alert('Horários de Funcionamento', text);
+				} else 
+					Alert('Horários de Funcionamento', 'Os horários de funcionamento não estão disponíveis.');
+			}).catch((error) => {
+				console.log(error);
+				Alert('Horários de Funcionamento', 'Os horários de funcionamento não estão disponíveis.');
+			});
+	}
+
 	render() {
 		if (!this.state.loading) {
 			return (
-				<TouchableOpacity onPress={this.openSearch.bind(this)}>
-					<Icon name="thumbsup" color="#fff" size={25} style={styles.backButton} />
-				</TouchableOpacity>
+				<View style={{ flexDirection: 'row', marginTop: 4 }}>
+					{ this.state.store ?
+					<TouchableOpacity onPress={this.openTimes.bind(this)}>
+						<Icon name="clock" color="#fff" size={25} style={styles.backButton} />
+					</TouchableOpacity>
+					: <View /> }
+
+					<TouchableOpacity onPress={this.openSearch.bind(this)}>
+						<Icon name="thumbsup" color="#fff" size={25} style={styles.backButton} />
+					</TouchableOpacity>
+				</View>
 			)
 		} else {
 			return (

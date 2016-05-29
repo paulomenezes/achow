@@ -46,13 +46,24 @@ class Stores extends React.Component {
 				})
 			})
 			.catch((error) => {
+				console.log(error);
 				Alert('Error', 'Houve um error ao se conectar ao servidor');
 			});
 	}
 
 	onClick(row) {
+		var name = '';
+		var address = '';
+		var phone = '';
+
+		try	{
+			name = decodeURIComponent(escape(row.name));
+		} catch (e) {
+			name = row.name;
+		}
+
 		this.props.toRoute({
-			name: decodeURIComponent(escape(row.name)),
+			name: name,
 			component: Store,
 			data: row,
 			rightCorner: Like,
@@ -64,20 +75,34 @@ class Stores extends React.Component {
 	}
 
 	renderStores(row) {
+		var name = '';
+		var address = '';
+		var phone = '';
+
+		try	{
+			name = decodeURIComponent(escape(row.name));
+			address = decodeURIComponent(escape(row.address));
+			phone = decodeURIComponent(escape(row.phone1));
+		} catch (e) {
+			name = row.name;
+			address = row.address;
+			phone = row.phone1;
+		}
+
 		var image = row.icon ? { uri: Constants.IMAGE + 'images/store/' + row.icon } : require('../images/logoSquare.png');
 		return (<TouchableOpacity style={ styles.row } onPress={() => this.onClick(row) }>
 					<View style={ styles.container }>
 						<Image style={ styles.image } source={image} />
 						<View style={ styles.texts }>
-							<Text style={ styles.title }>{ decodeURIComponent(escape(row.name)) }</Text>
+							<Text style={ styles.title }>{ name }</Text>
 							<View style={ styles.about }>
 								<View style={ styles.item }>
 									<Icon style={ styles.icon } name="map" color="#4F8EF7" size={ 20 } />
-									<View style={ styles.text }><Text style={ styles.size }>{ decodeURIComponent(escape(row.address)) }</Text></View>
+									<View style={ styles.text }><Text style={ styles.size }>{ address }</Text></View>
 								</View>
 								<View style={ styles.item }>
 									<Icon style={ styles.icon } name="ios-telephone" color="#4F8EF7" size={ 20 } />
-									<View style={ styles.text }><Text style={ styles.size }>{ decodeURIComponent(escape(row.phone1)) }</Text></View>
+									<View style={ styles.text }><Text style={ styles.size }>{ phone }</Text></View>
 								</View>
 							</View>
 						</View>

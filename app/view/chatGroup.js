@@ -98,6 +98,7 @@ class ChatGroup extends React.Component {
 				});
 			})
 			.catch((error) => {
+				console.log(error);
 				Alert('Error', 'Houve um error ao se conectar ao servidor');
 			});
 	}
@@ -112,6 +113,8 @@ class ChatGroup extends React.Component {
 
 			var props = this.props;
 			var data = this.state.messages;
+
+			console.log(JSON.stringify(message));
 
 			fetch(Constants.URL + 'chat', {
 					method: "POST",
@@ -133,6 +136,7 @@ class ChatGroup extends React.Component {
 					});
 				})
 				.catch((error) => {
+					console.log(error);
 		    		Alert('Error', 'Houve um error ao se conectar ao servidor');
 		    	});
 		}

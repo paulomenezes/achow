@@ -171,6 +171,20 @@ class Store extends React.Component {
 	}
 
 	render() {
+		var name = '';
+		var address = '';
+		var phone = '';
+
+		try	{
+			name = decodeURIComponent(escape(this.props.data.name));
+			address = decodeURIComponent(escape(this.props.data.address));
+			phone = decodeURIComponent(escape(this.props.data.phone1));
+		} catch (e) {
+			name = this.props.data.name;
+			address = this.props.data.address;
+			phone = this.props.data.phone1;
+		}
+
 		var commentsSize = viewHeight - 450;
 
 		return (
@@ -184,15 +198,15 @@ class Store extends React.Component {
 							autoPlay={true}/>
 					</View>
 					<View>
-						<Text style={ styles.title }>{ decodeURIComponent(escape(this.props.data.name)) }</Text>
+						<Text style={ styles.title }>{ name }</Text>
 						<View style={ styles.about }>
 							<TouchableOpacity style={ styles.item } onPress={ this.goMaps.bind(this) }>
 								<Icon style={ styles.icon } name="map" color="#4F8EF7" size={ 20 } />
-								<View style={ styles.text }><Text>{ decodeURIComponent(escape(this.props.data.address)) }</Text></View>
+								<View style={ styles.text }><Text>{ address }</Text></View>
 							</TouchableOpacity>
 							<TouchableOpacity style={ styles.item } onPress={ this.goPhone.bind(this) }>
 								<Icon style={ styles.icon } name="ios-telephone" color="#4F8EF7" size={ 20 } />
-								<View style={ styles.text }><Text>{ decodeURIComponent(escape(this.props.data.phone1)) }</Text></View>
+								<View style={ styles.text }><Text>{ phone }</Text></View>
 							</TouchableOpacity>
 							<TouchableOpacity style={ styles.item } onPress={ this.goPhotos.bind(this) }>
 								<Icon style={ styles.icon } name="ios-camera" color="#4F8EF7" size={ 20 } />
